@@ -8,30 +8,32 @@
     <link rel='stylesheet' type='text/css' media='screen' href='styles.css'>
 </head>
 <body>
-    <h1>Unit Converter</h1>
-    <div class="unit-choice-container">
-        <select id="unit-type">
-            <option value="length">Length</option>
-            <option value="speed">Speed</option>
-            <option value="temperature">Temperature</option>
-            <option value="pressure">Pressure</option>
-        </select>
-    </div>
-    
-    <div class="input-container">
-        <input type="number" id="input-amount" placeholder="Enter Amount Here" required>
-        <select id="unit-input-options">
-            <!-- Options will be dynamically populated using JavaScript -->
-        </select>
-    </div>   
+    <div class="main-container">
+        <h1>Unit Converter</h1>
+        <div class="unit-choice-container">
+            <select id="unit-type">
+                <option value="length">Length</option>
+                <option value="speed">Speed</option>
+                <option value="temperature">Temperature</option>
+                <option value="pressure">Pressure</option>
+            </select>
+        </div>
+        
+        <div class="input-container">
+            <input type="number" id="input-amount" placeholder="Enter Amount Here" required>
+            <select id="unit-input-options">
+                <!-- Options will be dynamically populated using JavaScript -->
+            </select>
+        </div>   
 
-    <button name="convert-button" onclick="convertUnits()">Convert</button>
+        <button name="convert-button" onclick="convertUnits()">Convert</button>
 
-    <div class="output-container">
-        <input type="number" id="output-amount" placeholder="Output Amount" required>
-        <select id="unit-output-options">
-            <!-- Options will be dynamically populated using JavaScript -->
-        </select>
+        <div class="output-container">
+            <input type="number" id="output-amount" placeholder="Output Amount" required>
+            <select id="unit-output-options">
+                <!-- Options will be dynamically populated using JavaScript -->
+            </select>
+        </div>
     </div>
 
     <script src='script.js'></script> 

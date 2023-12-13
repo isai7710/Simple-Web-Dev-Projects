@@ -1,17 +1,61 @@
+/* Centering the main container */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f0f0; /* Light gray background */
-    color: #333; /* Dark text color */
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-}
-
-/*
-div {
-    font-family: 'Arial', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9; /* Light gray background */
 }
-*/
+  
+  /* Styling for the main container */
+.main-container {
+    width: 300px; /* Adjust width as needed */
+    padding: 20px;
+    background-color: #fff; /* White background */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+  
+  /* Styling for the header */
+h1 {
+    text-align: center;
+    color: #333; /* Dark text color */
+}
+  
+  /* Styling for the input, select, and button */
+.input-container,
+.output-container {
+    margin: 15px 0;
+}
+  
+input[type="number"],
+select,
+button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc; /* Border for input/select/button */
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+  
+  /* Styling for the button */
+button {
+    background-color: #4285f4; /* Blue color for button background */
+    color: white; /* White text color */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+button:hover {
+    background-color: #357ae8; /* Darker blue on hover */
+}
+  
+  /* Styling for the output amount */
+#output-amount {
+    background-color: #f2f2f2; /* Light gray for output background */
+    color: #333; /* Dark text color */
+}
+  
