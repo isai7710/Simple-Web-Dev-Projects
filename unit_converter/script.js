@@ -3,27 +3,32 @@ const unitOptionsToSelectTop = document.getElementById('unit-input-options');
 const unitOptionsToSelectBottom = document.getElementById('unit-output-options');
 
 const unitsByType = {
-    length: ['mm', 'cm', 'm', 'km', 'in', 'ft', 'mi'],
+    length: ['mm', 'cm', 'm', 'km', 'in', 'ft', 'yds', 'mi'],
     speed: ['m/s', 'km/h', 'mph', 'kph'],
     temperature: ['°C', '°F', 'K'],
     pressure: ['Pa', 'atm', 'bar']
 };
 
 const conversionFactors = {
-    // TODO: Conversion factors for imperial units (in, ft, mi) and other units (temperature, pressure, etc.)
+    // TODO: Conversion factors for other units (temperature, pressure, etc.)
+    /* 
+        after choosing a base unit, we can convert any value 'v' by multiplying it by the 
+        source unit factor divided by the destination unit factor (Cs/Cd)
+        for example, to convert 8 yards to feet we do:
+          8 yards * (Cs / Cd)
+        = 8 yards * ((0.9144 meters/yard) / (0.3048 meters/feet))
+        = 8 yards * (0.9144 / 0.3048) feet/yard
+        = 24 feet
+    */
     length: {
-        mm_to_cm: 0.1,      // 1 mm = 0.1 cm
-        mm_to_m: 0.001,     // 1 mm = 0.001 m
-        mm_to_km: 0.000001, // 1 mm = 0.000001 km (or 0.001 * 0.001 for clarification)
-        cm_to_mm: 10,       // 1 cm = 10 mm
-        cm_to_m: 0.01,      // 1 cm = 0.01 m
-        cm_to_km: 0.00001,  // 1 cm = 0.00001 km (or 0.01 * 0.001 for clarification)
-        m_to_mm: 1000,      // 1 m = 1000 mm
-        m_to_cm: 100,       // 1 m = 100 cm
-        m_to_km: 0.001,     // 1 m = 0.001 km
-        km_to_mm: 1000000,  // 1 km = 1000000 mm (or 1000 * 1000 for clarification)
-        km_to_cm: 100000,   // 1 km = 100000 cm (or 100 * 1000 for clarification)
-        km_to_m: 1000       // 1 km = 1000 m
+        mm: 0.001,      // 0.001 m/mm
+        cm: 0.01,       // 0.01 m/cm
+        m: 1.0,         // base unit
+        km: 1000,       // 1000 m/km
+        in: 0.0254,     // 0.0254 m/km
+        ft: 0.3048,     // 0.3048 m/ft
+        yds: 0.9144,    // 0.9144 m/yds
+        mi: 1609.34     // 1609.34 m/mi
     }
 };
 
@@ -67,11 +72,7 @@ function convertUnits(){
 }
 
 function convertLength(value, inputUnits, outputUnits){
-    if (conversionFactors.length[inputUnits + '_to_' + outputUnits]) {
-        return value * conversionFactors.length[inputUnits + '_to_' + outputUnits];
-    } else if (inputUnits == outputUnits) {
-        return value;
-    }
+    return value * (conversionFactors.length[inputUnits] / conversionFactors.length[outputUnits]);
 }
 
 function appendErrorParagraph(errorMessage){
