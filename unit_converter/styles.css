@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5; /* Light gray background */
+    color: #333; /* Dark text color */
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+color: #4CAF50; /* Green color for the heading */
+}
+
+/* Styling for the input and button */
+input[type="number"],
+button {
+padding: 10px;
+margin: 10px;
+border: none;
+border-radius: 5px;
+background-color: #4CAF50; /* Green color for input/button background */
+color: white; /* White text color */
+cursor: pointer;
+}
+
+input[type="number"]:focus,
+button:focus {
+outline: none;
+box-shadow: 0 0 5px #4CAF50; /* Green shadow on focus */
+}
+
+/* Styling for select elements */
+select {
+padding: 8px;
+margin: 10px;
+border: none;
+border-radius: 5px;
+background-color: #4CAF50; /* Green color for select background */
+color: white; /* White text color */
+cursor: pointer;
+}
+
+/* Styling for the output container */
+.output-container {
+margin-top: 20px;
+}
+
+/* Styling for the output amount */
+#output-amount {
+padding: 10px;
+margin: 10px;
+border: none;
+border-radius: 5px;
+background-color: #4CAF50; /* Green color for output background */
+color: white; /* White text color */
+}
+  
