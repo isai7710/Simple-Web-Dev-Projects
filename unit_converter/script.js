@@ -2,8 +2,17 @@ const unitTypeSelected = document.getElementById('unit-type');
 const unitOptionsToSelectTop = document.getElementById('unit-input-options');
 const unitOptionsToSelectBottom = document.getElementById('unit-output-options');
 
+const conversion_factors_length = {
+    mm_to_cm: 10,
+    mm_to_m: 1000,
+    mm_to_km: 1000*1000,
+    cm_to_m: 100,
+    cm_to_km: 100*1000,
+    m_to_km: 1000
+}
+
 const unitsByType = {
-    length: ['cm', 'm', 'km', 'in', 'ft', 'mi'],
+    length: ['mm', 'cm', 'm', 'km', 'in', 'ft', 'mi'],
     speed: ['m/s', 'km/h', 'mph', 'kph'],
     temperature: ['°C', '°F', 'K'],
     pressure: ['Pa', 'atm', 'bar']
@@ -30,11 +39,28 @@ function populateUnits() {
 }
 
 function convertUnits(){
-    const inputValue = document.getElementById('input-amount').value;
+    const unitSelected = unitTypeSelected.value;
+    const inputValue = parseFloat(document.getElementById('input-amount').value);;
+    let outputValue = 0;
+
+    if (inputValue == null){
+        appendErrorParagraph('no amount inputed, please input amount and try again');
+    }
+
+    switch (unitSelected){
+        case 'length':
+            outputValue = convertLength(inputValue, unitOptionsToSelectTop.value, unitOptionsToSelectBottom.value);
+    }
+
     const outputElement = document.getElementById('output-amount');
+    outputElement.value = outputValue;
 
-    outputElement.value = inputValue;
+}
 
+function convertLength(v, inputUnits, outputUnits){
+    if (inputUnits == 'mm' && outputUnits == 'cm'){
+        return v * conversion_factors_length.mm_to_cm;
+    }
 }
 
 function appendErrorParagraph(errorMessage){
