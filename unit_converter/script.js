@@ -3,9 +3,9 @@ const unitOptionsToSelectTop = document.getElementById('unit-input-options');
 const unitOptionsToSelectBottom = document.getElementById('unit-output-options');
 
 const unitsByType = {
-    length: ['cm', 'm', 'km'],
-    speed: ['m/s', 'km/h'],
-    temperature: ['°C', '°F'],
+    length: ['cm', 'm', 'km', 'in', 'ft', 'mi'],
+    speed: ['m/s', 'km/h', 'mph', 'kph'],
+    temperature: ['°C', '°F', 'K'],
     pressure: ['Pa', 'atm', 'bar']
 };
 
