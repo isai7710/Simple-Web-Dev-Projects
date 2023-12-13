@@ -29,6 +29,21 @@ function populateUnits() {
     populateDropdown(unitOptionsToSelectBottom, units);
 }
 
+function convertUnits(){
+    const inputValue = document.getElementById('input-amount').value;
+    const outputElement = document.getElementById('output-amount');
+
+    outputElement.value = inputValue;
+
+}
+
+function appendErrorParagraph(errorMessage){
+    const paragraph = document.createElement('p');
+    // can also write paragraph.textContent = 'Error: ' + errorMessage;
+    paragraph.textContent = `Error: ${errorMessage}`;
+    document.body.appendChild(paragraph);
+}
+
 
 unitTypeSelected.addEventListener('change', populateUnits);
 
