@@ -83,6 +83,8 @@ function convertUnits(){
         case 'pressure':
             outputValue = convertPressure(inputValue, unitOptionsToSelectTop.value, unitOptionsToSelectBottom.value);
             break;
+        case 'temperature':
+            outputValue = convertTemp(inputValue, unitOptionsToSelectTop.value, unitOptionsToSelectBottom.value);
         default:
             console.log("Error");
     }
@@ -101,6 +103,24 @@ function convertSpeed(value, inputUnits, outputUnits) {
 
 function convertPressure(value, inputUnits, outputUnits) {
     return value * (conversionFactors.pressure[inputUnits] / conversionFactors.pressure[outputUnits]);
+}
+
+function convertTemp(value, inputUnits, outputUnits) {
+    if (inputUnits == outputUnits){
+        return value;
+    } else if (inputUnits == '°C' && outputUnits == '°F') {
+        return value * (9/5) + 32;
+    } else if (inputUnits == '°F' && outputUnits == '°C') {
+        return (value - 32) * (5/9);
+    } else if (inputUnits == '°F' && outputUnits == 'K') {
+        return (value - 32) * (5/9) + 273.15;
+    } else if (inputUnits == '°C' && outputUnits == 'K') {
+        return value + 273.15;
+    } else if (inputUnits == 'K' && outputUnits == '°C') {
+        return value - 273.15;
+    } else if (inputUnits == 'K' && outputUnits == '°F') {
+        return (value - 273.15) * (9/5) + 32;
+    }
 }
 
 function appendErrorParagraph(errorMessage){
