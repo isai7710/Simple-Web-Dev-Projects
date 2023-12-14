@@ -4,9 +4,9 @@ const unitOptionsToSelectBottom = document.getElementById('unit-output-options')
 
 const unitsByType = {
     length: ['mm', 'cm', 'm', 'km', 'in', 'ft', 'yds', 'mi'],
-    speed: ['m/s', 'km/h', 'mph', 'kph'],
+    speed: ['m/s', 'km/h', 'mph', 'ft/s'],
     temperature: ['°C', '°F', 'K'],
-    pressure: ['Pa', 'atm', 'bar']
+    pressure: ['Pa', 'atm', 'bar', 'lbf/in^2']
 };
 
 const conversionFactors = {
@@ -21,14 +21,26 @@ const conversionFactors = {
         = 24 feet
     */
     length: {
-        mm: 0.001,      // 0.001 m/mm
-        cm: 0.01,       // 0.01 m/cm
-        m: 1.0,         // base unit
-        km: 1000,       // 1000 m/km
-        in: 0.0254,     // 0.0254 m/km
-        ft: 0.3048,     // 0.3048 m/ft
-        yds: 0.9144,    // 0.9144 m/yds
-        mi: 1609.34     // 1609.34 m/mi
+        'mm': 0.001,      // 0.001 m/mm
+        'cm': 0.01,       // 0.01 m/cm
+        'm': 1.0,         // base unit
+        'km': 1000,       // 1000 m/km
+        'in': 0.0254,     // 0.0254 m/km
+        'ft': 0.3048,     // 0.3048 m/ft
+        'yds': 0.9144,    // 0.9144 m/yds
+        'mi': 1609.34     // 1609.34 m/mi
+    },
+    speed: {
+        'm/s': 1.0,         // base unit 
+        'km/h': 0.2778,     // 0.2778 (m/s)/(km/h)
+        'mph': 0.44704,     // 0.44704 (m/s)/(mph)
+        'ft/s': 0.3048,     // 0.3048 (m/s)/(ft/s)
+    },
+    pressure: {
+        'Pa': 1.0,              // base unit
+        'atm': 101325,          // 101325 Pa/atm
+        'bar': 100000,          // 100000 Pa/bar
+        'lbf/in^2': 6894.76     // 6894.76 Pa/(lbf/in^2)
     }
 };
 
@@ -64,15 +76,31 @@ function convertUnits(){
     switch (unitSelected){
         case 'length':
             outputValue = convertLength(inputValue, unitOptionsToSelectTop.value, unitOptionsToSelectBottom.value);
+            break;
+        case 'speed':
+            outputValue = convertSpeed(inputValue, unitOptionsToSelectTop.value, unitOptionsToSelectBottom.value);
+            break;
+        case 'pressure':
+            outputValue = convertPressure(inputValue, unitOptionsToSelectTop.value, unitOptionsToSelectBottom.value);
+            break;
+        default:
+            console.log("Error");
     }
 
     const outputElement = document.getElementById('output-amount');
     outputElement.value = outputValue;
-
 }
 
-function convertLength(value, inputUnits, outputUnits){
+function convertLength(value, inputUnits, outputUnits) {
     return value * (conversionFactors.length[inputUnits] / conversionFactors.length[outputUnits]);
+}
+
+function convertSpeed(value, inputUnits, outputUnits) {
+    return value * (conversionFactors.speed[inputUnits] / conversionFactors.speed[outputUnits]);
+}
+
+function convertPressure(value, inputUnits, outputUnits) {
+    return value * (conversionFactors.pressure[inputUnits] / conversionFactors.pressure[outputUnits]);
 }
 
 function appendErrorParagraph(errorMessage){
