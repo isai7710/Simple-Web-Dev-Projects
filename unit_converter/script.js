@@ -41,6 +41,20 @@ const conversionFactors = {
         'atm': 101325,          // 101325 Pa/atm
         'bar': 100000,          // 100000 Pa/bar
         'lbf/in^2': 6894.76     // 6894.76 Pa/(lbf/in^2)
+    },
+    temperature: {
+        '°C': {
+            '°F': (value) => value * (9 / 5) + 32,
+            'K': (value) => value + 273.15
+          },
+          '°F': {
+            '°C': (value) => (value - 32) * (5 / 9),
+            'K': (value) => (value - 32) * (5 / 9) + 273.15
+          },
+          'K': {
+            '°C': (value) => value - 273.15,
+            '°F': (value) => (value - 273.15) * (9 / 5) + 32
+          }
     }
 };
 
@@ -108,18 +122,9 @@ function convertPressure(value, inputUnits, outputUnits) {
 function convertTemp(value, inputUnits, outputUnits) {
     if (inputUnits == outputUnits){
         return value;
-    } else if (inputUnits == '°C' && outputUnits == '°F') {
-        return value * (9/5) + 32;
-    } else if (inputUnits == '°F' && outputUnits == '°C') {
-        return (value - 32) * (5/9);
-    } else if (inputUnits == '°F' && outputUnits == 'K') {
-        return (value - 32) * (5/9) + 273.15;
-    } else if (inputUnits == '°C' && outputUnits == 'K') {
-        return value + 273.15;
-    } else if (inputUnits == 'K' && outputUnits == '°C') {
-        return value - 273.15;
-    } else if (inputUnits == 'K' && outputUnits == '°F') {
-        return (value - 273.15) * (9/5) + 32;
+    }
+    if (conversionFactors.temperature[inputUnits] && conversionFactors.temperature[outputUnits]){
+        return conversionFactors.temperature[inputUnits][outputUnits](value);
     }
 }
 
