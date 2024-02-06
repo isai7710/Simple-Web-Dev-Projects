@@ -4,7 +4,7 @@ const unitOptionsToSelectBottom = document.getElementById('unit-output-options')
 
 const unitsByType = {
     length: ['mm', 'cm', 'm', 'km', 'in', 'ft', 'yds', 'mi'],
-    speed: ['m/s', 'km/h', 'mph', 'ft/s'],
+    speed: ['m/s', 'km/h', 'mph', 'ft/s', 'mi/min', 'km/min'],
     temperature: ['°C', '°F', 'K'],
     pressure: ['Pa', 'atm', 'bar', 'lbf/in^2']
 };
@@ -35,6 +35,8 @@ const conversionFactors = {
         'km/h': 0.2778,     // 0.2778 (m/s)/(km/h)
         'mph': 0.44704,     // 0.44704 (m/s)/(mph)
         'ft/s': 0.3048,     // 0.3048 (m/s)/(ft/s)
+        'mi/min': 0.03728,  // 0.03728 (m/s)/(mi/min)
+        'km/min': 0.06,     // 0.06 (m/s)/(km/min)
     },
     pressure: {
         'Pa': 1.0,              // base unit
