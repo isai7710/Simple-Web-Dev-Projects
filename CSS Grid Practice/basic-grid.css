@@ -1,16 +1,66 @@
-.basic-grid {
+.basic-grid-w-auto-fit {
+    display: grid;
+    gap: 1rem;
+
+    /* COLUMN DISPLAY OPTION 1: too skinny, too much code */
+    /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr; */
+    /* -------------------- Explanation -------------------- 
+    1fr = 1 fractional unit
+    if there is one 1fr then we have one column that takes 100% of the available space
+    if there are two 1fr then we have two columns that each take 50% of the available space 
+    if there are three 1fr then we have three columns that each take 25% of the available space and so on
+    in this case we explicitly wrote 12 columns (for the 12 divs on html file) so twelve 1frs means we have twelve 
+        columns that each take (100/(2^12-1))% of the available space
+    -------------------------------------------------------- */
+    /* -------------------- Problems --------------------
+    1. grid is not responsive to change in viewport size in the way we wanted it to be
+    2. code is repetitive and therefore ugly
+    -------------------------------------------------------- */
+
+    /* COLUMN DISPLAY OPTION 2: cleaner code, but still not as dynamic */
+    /* grid-template-columns: repeat(6, 1fr); */ 
+    /* -------------------- Explanation --------------------
+    helper function repeat allows us to call the unit 1fr twelve times to the grid-template-columns variable
+    identical to first option but much more concise
+    -------------------------------------------------------- */
+    /* -------------------- Problems --------------------
+    1. grid is not responsive to change in viewport size in the way we wanted it to be
+    2. columns are too thin 
+    -------------------------------------------------------- */
+  
+    /* COLUMN DISPLAY OPTION 3:  better sizing, but overflows */
+    /* grid-template-columns: repeat(6, minmax(240px, 1fr));*/ 
+    /* -------------------- Explanation --------------------
+    same use of repeat but now with minmax function included, which basically says make sure columns don't go below 240 pixels in width but allow them to expand to 
+    however many pixels 1 fractional unit will allow. Now they aren't as skinny, but....
+    -------------------------------------------------------- */
+    /* -------------------- Problems --------------------
+    1. overflow on horizontal axis
+    -------------------------------------------------------- */
+  
+    /* COLUMN DISPLAY OPTION 4: implicit grid, let the algorithm figure out how big to make it*/
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    /* -------------------- Explanation --------------------
+    auto-fit: calculate number of rows and columns on the fly
+    auto-fill: creates additional columns when there is additional space
+    -------------------------------------------------------- */
+}
+
+
+.basic-grid-w-auto-fill{
     display: grid;
     gap: 1rem;
 
     /* 1 too skinny, too much code */
     /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; */
-  
+    
     /* 2 cleaner code */
     /* grid-template-columns: repeat(12, 1fr); */
-  
+    
     /* 3  better sizing, but overflows */
     /* grid-template-columns: repeat(12, minmax(240px, 1fr)); */
-  
+    
     /* 4 final */
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+
 }
